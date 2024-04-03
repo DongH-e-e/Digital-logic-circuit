@@ -1,0 +1,23 @@
+module EightCases (
+    input wire a,
+    input wire b,
+    input wire c,
+    output reg p
+);
+
+always @(*) begin
+    case ({a, b, c})
+        3'b000: p = 1'b0; // p = 0
+        3'b001: p = 1'b0; // p = 0
+        3'b010: p = 1'b1; // p = 1
+        3'b011: p = 1'b1; // p = 1
+        3'b100: p = 1'b1; // p = 1
+        3'b101: p = 1'b0; // p = 0
+        3'b110: p = 1'b1; // p = 1
+        3'b111: p = 1'b1; // p = 1
+        default: p = 1'b0; // Default case, output 0
+    endcase
+end
+
+endmodule
+
