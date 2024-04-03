@@ -1,0 +1,40 @@
+`timescale 1ns/1ns
+
+module tb_counter();
+  // Inputs
+  reg clk;
+  reg rst_n;
+
+  // Outputs
+  wire [3:0] cnt;
+
+  // Instantiate the counter module
+  counter dut (
+    .clk(clk),
+    .rst_n(rst_n),
+    .cnt(cnt)
+  );
+
+  // Clock generation
+  always #5 clk = ~clk; // Toggle every 5 time units
+
+  // Initializations
+  initial begin
+    clk = 0;
+    rst_n = 0;
+    #10; // Wait for some time
+
+    // Release reset
+    rst_n = 1;
+    #10; // Wait for some time
+
+    // Apply reset again
+    rst_n = 0;
+    #5; // Hold reset for a short duration
+    rst_n = 1; // Release reset
+
+    // Test counter behavior
+    #50; // Wait for some cycles to observe counter output
+    $stop; // Stop simulation
+  end
+endmodule
